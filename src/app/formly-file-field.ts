@@ -10,22 +10,6 @@ import {
 } from '@angular/forms';
 import { FieldTypeConfig, FormlyModule } from '@ngx-formly/core';
 
-@Component({
-  selector: 'formly-field-file',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormlyModule,
-    FormlyMaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-  template: `
-    <input type="file" [formControl]="formControl" [formlyAttributes]="field" />
-  `,
-})
-export class FormlyFileComponent extends FieldType<FieldTypeConfig> {}
-
 @Directive({
   standalone: true,
   selector: 'input[type=file]',
@@ -50,3 +34,20 @@ export class FileValueAccessor implements ControlValueAccessor {
     this.onTouched = fn;
   }
 }
+
+@Component({
+  selector: 'formly-field-file',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormlyModule,
+    FormlyMaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FileValueAccessor,
+  ],
+  template: `
+    <input type="file" [formControl]="formControl" [formlyAttributes]="field" />
+  `,
+})
+export class FormlyFileComponent extends FieldType<FieldTypeConfig> {}
